@@ -5,18 +5,36 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Button
+import android.view.View
+import android.widget.EditText
 
-class MainActivity() : Activity() {
+class MainActivity() : Activity(), View.OnClickListener {
+
+    var btn: Button? = null
+    var printText: TextView? = null
+    var editText: EditText? = null
+
+    var talk = StringBuilder("しょぼちむだよー！")
+
     override fun onCreate(saveInstanceState: Bundle?) {
-        super.onCreate(saveInstanceState)
+        super<Activity>.onCreate(saveInstanceState)
+        setContentView(R.layout.activity_main)
 
-        val helloSyobochim = TextView(this)
-        helloSyobochim.setText("syobochim app だぜー！！！")
+        btn = findViewById(R.id.button01) as Button
+        printText = findViewById(R.id.textView) as TextView
+        editText = findViewById(R.id.editText01) as EditText
 
-        setContentView(helloSyobochim)
+        btn?.setOnClickListener(this)
     }
 
-    override fun onCreateOptionsMenu(menu : Menu): Boolean {
+    override fun onClick(v: View) {
+        talk.append("\r\n")
+        talk.append(editText?.getText())
+        printText?.setText(talk.toString())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         getMenuInflater().inflate(R.menu.menu_main, menu)
         return true
     }
@@ -26,6 +44,6 @@ class MainActivity() : Activity() {
         if (id == R.id.action_settings) {
             return true
         }
-        return super.onOptionsItemSelected(item)
+        return super<Activity>.onOptionsItemSelected(item)
     }
 }

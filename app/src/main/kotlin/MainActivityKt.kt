@@ -32,6 +32,8 @@ class MainActivity() : Activity(), View.OnClickListener {
         talk.append("\r\n")
         talk.append(editText?.getText())
         printText?.setText(talk.toString())
+
+        editText?.setText("")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
